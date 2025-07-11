@@ -1,92 +1,218 @@
-# Google Workspace Browser Samples [![Build Status](https://travis-ci.org/gsuitedevs/browser-samples.svg?branch=master)](https://travis-ci.org/gsuitedevs/browser-samples)
+# 📝 Todo Manager
 
-Browser samples for [Google Workspace APIs](https://developers.google.com/gsuite/) docs.
+A modern, responsive todo list management application built with Laravel and Vue.js. This application provides a clean and intuitive interface for managing your tasks across both mobile and desktop devices.
 
-## APIs
+## ✨ Features
 
-### [Admin SDK](https://developers.google.com/admin-sdk/)
+- **Modern UI/UX**: Beautiful, responsive design that works seamlessly on mobile and desktop
+- **Task Management**: Create, edit, delete, and organize your tasks
+- **Priority Levels**: Set priorities (Low, Medium, High) for better task organization
+- **Due Dates**: Set due dates with date/time picker
+- **Status Tracking**: Mark tasks as completed or pending
+- **Real-time Search**: Search through your tasks instantly
+- **Smart Filtering**: Filter tasks by status (All, Pending, Completed)
+- **Statistics Dashboard**: View task statistics at a glance
+- **Responsive Design**: Optimized for all screen sizes
 
-### [Apps Script API](https://developers.google.com/apps-script/api)
+## 🛠 Tech Stack
 
-- [Quickstart](apps-script/quickstart)
+- **Backend**: Laravel 12 (PHP 8.2+)
+- **Frontend**: Vue.js 3 with Composition API
+- **Styling**: Tailwind CSS
+- **Database**: SQLite (default) - easily configurable to MySQL/PostgreSQL
+- **Build Tool**: Vite
+- **API**: RESTful API with JSON responses
 
-### [Calendar](https://developers.google.com/calendar)
+## 📋 Requirements
 
-- [Quickstart](calendar/quickstart)
+- PHP 8.2 or higher
+- Composer
+- Node.js 18 or higher
+- npm or yarn
 
-### [Classroom](https://developers.google.com/classroom)
+## 🚀 Installation
 
-- [Quickstart](classroom/quickstart)
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd todo-manager
+   ```
 
-### [Drive](https://developers.google.com/drive/v3)
+2. **Install PHP dependencies**
+   ```bash
+   composer install
+   ```
 
-- [Quickstart](drive/quickstart)
+3. **Install Node.js dependencies**
+   ```bash
+   npm install
+   ```
 
-### [Docs](https://developers.google.com/docs)
+4. **Environment setup**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-- [Quickstart](docs/quickstart)
+5. **Database setup**
+   ```bash
+   php artisan migrate
+   ```
 
-### [Gmail](https://developers.google.com/gmail/api/)
+6. **Build frontend assets**
+   ```bash
+   npm run build
+   ```
 
-- [Quickstart](gmail/quickstart)
+## 🏃‍♂️ Running the Application
 
-### [People](https://developers.google.com/people/)
+### Development Mode
 
-- [Quickstart](people/quickstart)
+1. **Start the Laravel development server**
+   ```bash
+   php artisan serve
+   ```
 
-### [Sheets](https://developers.google.com/sheets/api/)
+2. **In another terminal, start the Vite development server**
+   ```bash
+   npm run dev
+   ```
 
-- [Quickstart](sheets/quickstart)
-- [Snippets](sheets/snippets)
+3. **Access the application**
+   Open your browser and visit `http://localhost:8000`
 
-### [Slides](https://developers.google.com/slides/)
+### Production Mode
 
-- [Quickstart](slides/quickstart)
-- [Snippets](slides/snippets)
+1. **Build production assets**
+   ```bash
+   npm run build
+   ```
 
-## Setup
+2. **Serve with a web server**
+   Configure your web server (Apache/Nginx) to serve from the `public` directory
 
-1. Clone this repository.
-1. Follow the README instructions in the API folder to run and test samples.
+## 📱 API Endpoints
 
-## Troubleshooting
+The application provides a RESTful API for managing todos:
 
-Here are some tips for troubleshooting errors when running these samples:
+- `GET /api/todos` - Get all todos (with optional filters)
+- `POST /api/todos` - Create a new todo
+- `GET /api/todos/{id}` - Get a specific todo
+- `PUT /api/todos/{id}` - Update a todo
+- `DELETE /api/todos/{id}` - Delete a todo
+- `PATCH /api/todos/{id}/toggle` - Toggle todo completion status
 
-- Be sure to create a local HTTP server to server the HTML page in the quickstart example. Otherwise the `gapi` client may encounter errors.
-- Check your browser console for errors. In Chrome, this is under **View > Developer > JavaScript Console**
+### API Query Parameters
 
-Below are some possible errors you may encounter:
+- `status`: Filter by status (`pending`, `completed`)
+- `priority`: Filter by priority (`low`, `medium`, `high`)
+- `search`: Search in title and description
 
-### Error: origin_mismatch
+## 🎨 Features Overview
 
-This error will occur during the authorization flow if the host and port used to serve the web page doesn't match an allowed JavaScript origin on your Google Developers Console project. Make sure to correctly specify **Authorized JavaScript origins** in the quickstart steps.
+### Dashboard Statistics
+- Total tasks count
+- Completed tasks count
+- Pending tasks count
+- High priority tasks count
 
-### idpiframe_initialization_failed: Failed to read the 'localStorage' property from 'Window'
+### Task Management
+- **Create**: Add new tasks with title, description, priority, and due date
+- **Edit**: Inline editing of existing tasks
+- **Delete**: Remove tasks with confirmation
+- **Toggle**: Quick completion status toggle
+- **Search**: Real-time search functionality
+- **Filter**: Filter by completion status
 
-The Google Sign-in library requires that 3rd party cookies and data storage is enabled in the web browser. For users that run into this error, prompt them to enable the feature or add an exception for accounts.google.com.
+### Responsive Design
+- **Mobile-first**: Optimized for mobile devices
+- **Desktop-friendly**: Enhanced experience on larger screens
+- **Touch-friendly**: Large tap targets for mobile interaction
+- **Accessible**: Proper semantic markup and keyboard navigation
 
-### idpiframe_initialization_failed: Not a valid origin for the client
+## 🗄 Database Schema
 
-The Google Sign-in library requires that the domain registered in the Google Developers Console matches the domain being used to host the web page. Make sure to correctly specify **Authorized JavaScript origins** in the quickstart steps.
-
-## Linting
-
-This project uses [htmllint](https://github.com/htmllint/htmllint).
-
-Install & run:
-
-```sh
-sudo npm install -g htmllint-cli
-htmllint
+### Todos Table
+```sql
+- id (bigint, primary key)
+- title (string, required)
+- description (text, nullable)
+- completed (boolean, default: false)
+- priority (enum: low|medium|high, default: medium)
+- due_date (timestamp, nullable)
+- created_at (timestamp)
+- updated_at (timestamp)
 ```
 
-Configure [options](https://github.com/htmllint/htmllint/wiki/Options) in the `.htmllintrc`.
+## 🧪 Testing
 
-## Client Library
+Run the test suite:
+```bash
+php artisan test
+```
 
-Google Workspace APIs use the [Google API Javascript client library](https://github.com/google/google-api-javascript-client).
+## 🔧 Configuration
 
-## Contributing
+### Database Configuration
+Edit the `.env` file to configure your database:
 
-Contributions welcome! See the [Contributing Guide](CONTRIBUTING.md).
+```env
+DB_CONNECTION=sqlite
+DB_DATABASE=/absolute/path/to/database.sqlite
+```
+
+For MySQL/PostgreSQL:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=todo_manager
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
+
+### Asset Building
+- Development: `npm run dev`
+- Production: `npm run build`
+- Watch mode: `npm run dev` (with hot reload)
+
+## 🚀 Deployment
+
+### Production Checklist
+1. Set `APP_ENV=production` in `.env`
+2. Set `APP_DEBUG=false` in `.env`
+3. Run `composer install --optimize-autoloader --no-dev`
+4. Run `npm run build`
+5. Run `php artisan config:cache`
+6. Run `php artisan route:cache`
+7. Set up proper web server configuration
+
+### Web Server Configuration
+Point your web server document root to the `public` directory and ensure URL rewriting is enabled.
+
+## 🎯 Browser Support
+
+- Chrome 90+
+- Firefox 88+
+- Safari 14+
+- Edge 90+
+
+## 📄 License
+
+This project is open-sourced software licensed under the [MIT license](LICENSE).
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📞 Support
+
+If you encounter any issues or have questions, please file an issue on the GitHub repository.
+
+---
+
+**Built with ❤️ using Laravel and Vue.js**

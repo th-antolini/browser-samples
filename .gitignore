@@ -1,26 +1,49 @@
-# General
+/vendor/
+/node_modules/
+/public/hot
+/public/storage
+/storage/*.key
+/storage/app/public/
+/storage/framework/
+/storage/logs/
+/.env
+/.env.backup
+/.env.production
+/Homestead.json
+/Homestead.yaml
+/auth.json
+/npm-debug.log
+/yarn-error.log
+/.fleet
+/.idea
+/.vscode
 .DS_Store
-.AppleDouble
-.LSOverride
+Thumbs.db
 
-# Icon must end with two \r
-Icon
+# Laravel specific
+/bootstrap/cache/*.php
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
 
-# Thumbnails
+# Vue/Node specific
+/dist/
+*.local
+
+# Database
+/database/*.sqlite
+/database/*.sqlite-journal
+
+# Compiled assets
+/public/css
+/public/js
+/public/mix-manifest.json
+
+# OS generated files
+.DS_Store
+.DS_Store?
 ._*
-
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
 .Spotlight-V100
-.TemporaryItems
 .Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+ehthumbs.db
+Thumbs.db
